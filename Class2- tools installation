@@ -1,0 +1,63 @@
+GIT, Docker, Jenkins, terraform, packer, java and maven installation
+=====================================================================
+Playground: https://killercoda.com/login > signup with your google > click on playground > then, click on ubuntu
+
+1)TIPS> All the software is having some version, majorly you can read like:
+      <Major-version>.<Minor-version>.<fix-pack>
+
+2)Mostly software-name --version This is command to check software version
+
+3) Many time it will ask for Y/n, we need to select y from keyboard and press enter.
+
+1)GIT
+=====
+Installation: apt install git
+Uninstallation: apt-get remove git
+Version check: git --version
+
+2)Java
+======
+apt install openjdk-17-jre-headless
+apt remove openjdk-17-jre-headless
+java --version
+
+ubuntu $ java --version
+openjdk 11.0.19 2023-04-18
+OpenJDK Runtime Environment (build 11.0.19+7-post-Ubuntu-0ubuntu120.04.1)
+OpenJDK 64-Bit Server VM (build 11.0.19+7-post-Ubuntu-0ubuntu120.04.1, mixed mode, sharing)
+
+ubuntu $ java --version
+openjdk 17.0.7 2023-04-18
+OpenJDK Runtime Environment (build 17.0.7+7-Ubuntu-0ubuntu120.04)
+OpenJDK 64-Bit Server VM (build 17.0.7+7-Ubuntu-0ubuntu120.04, mixed mode, sharing)
+
+Docker
+======
+intall: apt install docker.io
+uninstall: apt remove docker.io
+version check: docker --version
+
+Exacize: Take a unix[server] box and install docker, GIT and Java
+
+Terraform and packer
+====================
+>>> owner of terraform and packer is Heshicorp
+
+https://developer.hashicorp.com/terraform/downloads
+
+wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+sudo apt update && sudo apt install terraform
+
+
+wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+
+echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+
+sudo apt update && sudo apt install terraform
+
+sudo apt update && sudo apt install packer
+
+Exacize 2: Install terraform and packer
+copy: control + C
+Insert: shift + insert
