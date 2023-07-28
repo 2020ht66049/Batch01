@@ -23,6 +23,10 @@ Above code can we devided into 2 categary:
         ./mvnw clean package -DskipTests
         java -jar target/*.jar
 
+
+ docker run -idt -p 8080:8080 2020ht66049/application:zursayume
+
+
 Above steps are supporting 100 user, and my requirement is 200, then I need to add 1 more server. but before I add I need run step 1 and step2 on that 
 server which is causing delay of appox 10 minutes
 
@@ -32,9 +36,17 @@ To resolve this we have some good approache-
 2) Jfrog Artifactory
 
 
-https://labs.play-with-docker.com/ 
-loginid: github login id
-passwd: github password
+Artifactory means:it is a place where we store the artifact to run our application to avoid similar activity by multiple user.
 
-Exacize: login to server and run below command
-docker run 2020ht66049/image1:zursay
+GIT hub vs articatory
+=====================
+1) GIThub has a size limit object more the 50 MB are not allowed.
+2) it only meant for text data.
+
+WORA: Write once run anywhere
+
+Devops Promotes WORA concepts, so similar activity can be avoided
+
+killer koda configuration is 2 GB RAM , and 1 CPU
+
+homework: https://www.youtube.com/watch?v=bKp1Vif9oO4
