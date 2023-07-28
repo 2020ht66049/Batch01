@@ -1,0 +1,40 @@
+1) Jfrog Artifactory
+2) Jfrog Xray Scan
+
+
+Then you tell me what you undertood, and what is advantage of it
+
+apt install maven
+apt install openjdk-17-jre-headless
+git clone https://github.com/spring-projects/spring-petclinic.git
+cd spring-petclinic
+./mvnw clean package -DskipTests
+java -jar target/*.jar
+
+Above code can we devided into 2 categary:
+
+1) Infrastucture setup
+        apt install maven
+        apt install openjdk-17-jre-headless
+
+2) Application deployment
+        git clone https://github.com/spring-projects/spring-petclinic.git
+        cd spring-petclinic
+        ./mvnw clean package -DskipTests
+        java -jar target/*.jar
+
+Above steps are supporting 100 user, and my requirement is 200, then I need to add 1 more server. but before I add I need run step 1 and step2 on that 
+server which is causing delay of appox 10 minutes
+
+To resolve this we have some good approache-
+
+1) Golden image
+2) Jfrog Artifactory
+
+
+https://labs.play-with-docker.com/ 
+loginid: github login id
+passwd: github password
+
+Exacize: login to server and run below command
+docker run 2020ht66049/image1:zursay
