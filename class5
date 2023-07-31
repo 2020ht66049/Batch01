@@ -1,0 +1,54 @@
+Docker
+======
+>>> Whenever we are getting any instruction to deploy application, development team specify the dependancy-
+
+Example: 
+git clone https://github.com/spring-projects/spring-petclinic.git
+cd spring-petclinic
+./mvnw package
+java -jar target/*.jar
+
+Petclinic is a Spring Boot application built using Maven or Gradle. You can build a jar file and run it from the command line (it should work just as well with Java 17 or newer):
+
+
+So, when we setup the environment we need to install those dependancies
+
+ubuntu
+apt-get update
+apt install openjdk-17-jre-headless -y
+git clone https://github.com/spring-projects/spring-petclinic.git
+cd spring-petclinic
+./mvnw clean package -DskipTests
+java -jar target/*.jar
+
+Writing docker file rule:
+=========================
+1) The instruction should be from <OS-name> where you want to deploy the application
+      FROM ubuntu, centos, alpine
+      from ubuntu
+      from centos
+      from aline
+
+2) I want to print some message on linux terminal
+      command: echo "Message"
+      Docker-Command-keyword echo messase
+
+Dockerfile
+==========
+It contains set of instruction to create docker image
+
+How to create docker image?
+==========================
+docker build -t imagename .
+
+How to run docker image
+=======================
+docker run imagename  
+
+Docker-Command-keyword
+======================
+CMD: Whenever we want to execute any command to run the application  we use this instruction
+
+Basic concept of docker
+=======================
+Whenever we are installing any software, we are downloading the software and running .exe file. and that .exe file container everything
