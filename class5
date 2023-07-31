@@ -13,13 +13,30 @@ Petclinic is a Spring Boot application built using Maven or Gradle. You can buil
 
 So, when we setup the environment we need to install those dependancies
 
-ubuntu
-apt-get update
-apt install openjdk-17-jre-headless -y
-git clone https://github.com/spring-projects/spring-petclinic.git
-cd spring-petclinic
-./mvnw clean package -DskipTests
-java -jar target/*.jar
+from ubuntu
+RUN apt-get update
+RUN apt install openjdk-17-jre-headless -y
+RUN apt-get update
+RUN apt install git -y
+RUN git clone https://github.com/spring-projects/spring-petclinic.git
+WORKDIR spring-petclinic
+RUN ./mvnw clean package -DskipTests
+CMD java -jar target/*.jar
+
+from <os-name>
+RUN <Instruction1>
+RUN <Instruction2>
+RUN <Instruction3>
+RUN <Instruction4>
+RUN <Instruction5>
+CMD <last command>
+
+Note: if RUN cd come then replace it with workdir
+
+
+
+
+
 
 Writing docker file rule:
 =========================
@@ -36,6 +53,8 @@ Writing docker file rule:
 Dockerfile
 ==========
 It contains set of instruction to create docker image
+from <os name>
+cmd echo "message"
 
 How to create docker image?
 ==========================
@@ -47,8 +66,71 @@ docker run imagename
 
 Docker-Command-keyword
 ======================
+RUN: it used to install required software
+WORKDIR > RUN cd
+FROM: It is used to choose the OS image.
 CMD: Whenever we want to execute any command to run the application  we use this instruction
+ENTRYPOINT:
+veryimpotant point[CMD means argument can be overwritted, but in entrypoint it's fixed.
+entrypoint cmd
+ping google.com
+ping yahoo.com
+ping localhost
+
+
 
 Basic concept of docker
 =======================
 Whenever we are installing any software, we are downloading the software and running .exe file. and that .exe file container everything
+
+My requirement is-
+
+You need to tell me 2 things-
+a) Containt of docker file.
+b) command to create docker image.
+c) Command to write docker image.
+
+1) Print hello message by ubuntu linux, and save it as image21:ubuntu
+Dockerfile:
+from ubuntu
+cmd echo "Hello" 
+creating image: docker build -t image21:ubuntu .[current working directory]
+running image: docker run image21:ubuntu
+     
+2) Print Namaste by alpine linux, and save it as image21:alpine
+Dockerfile:
+from alpine
+cmd echo Namaste
+creating image:docker build -t image21:alpine .
+running image: docker run image21:alpine
+
+3) Print bye by centos linux, and save it as image21:centos
+Dockerfile: 
+from centos
+cmd echo bye
+creating image: docker build -t image21:centos .
+running image: docker run image21:centos
+
+4) Create a docker image to print "Welcome to Docker world" in alpine linux.
+      from alpine
+      cmd echo "Welcome to Docker world"
+
+      docker build -t umesh[name of image] .
+      docke run umesh
+
+
+5) from ubuntu
+   cmd echo "Who are you?"
+
+
+6) from ubuntu
+   cmd echo "Who are you?"
+   cmd echo "Where are you?"
+
+Homework
+
+Task create docker image with name terraform to deploy below intruction in ubuntu image
+========================================================================================
+wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+sudo apt update && sudo apt install terraform
