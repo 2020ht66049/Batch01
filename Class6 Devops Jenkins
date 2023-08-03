@@ -1,0 +1,20 @@
+Pipeline
+=========
+Pipeline is a set of stages to perform any activity.
+
+My requirement: I want to deploy spring pet clinic application
+
+Task1: Create Environment and install softwares
+                  [Infrastucture Speciliast]
+
+Task2: Application Deployment
+                  [Deployment Engineer]
+
+Task3: Testing [Tester]
+
+>>> Communication between developer, tester and deployment Engineer's are done by mail/ticket, and we may have some delay.
+
+>>> To avoid this delay we have concept of pipeline.
+
+>>> to create pipeline we need to install jenkisn
+
