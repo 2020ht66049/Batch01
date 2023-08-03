@@ -12,6 +12,32 @@ Task2: Application Deployment
 
 Task3: Testing [Tester]
 
+
+pipeline {
+    agent any
+
+    stages {
+        stage('Infrasture creation') {
+            steps {
+                echo 'Hello World'
+            }
+        }
+        stage('Deployment') {
+            steps {
+                echo 'Hello World'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Hello World'
+            }
+        }
+    }
+}
+
+
+
+
 >>> Communication between developer, tester and deployment Engineer's are done by mail/ticket, and we may have some delay.
 
 >>> To avoid this delay we have concept of pipeline.
