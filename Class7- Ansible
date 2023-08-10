@@ -1,0 +1,61 @@
+Ansible and Monitoring
+========================
+
+ubuntu $ date
+Thu Aug 10 13:37:33 UTC 2023
+
+Suppose, if I have multiple server then I need to run command multiple times. it would be good if we run it once and get output from all?
+Ansible
+
+For lab purpose, we would be creating 4 servers-
+
+devops@ip-172-31-30-236:/root$ ansible -i /etc/ansible/hosts -m command -a "date" all
+ec2-54-186-162-116.us-west-2.compute.amazonaws.com | CHANGED | rc=0 >>
+Thu Aug 10 13:58:24 UTC 2023
+ec2-34-222-65-192.us-west-2.compute.amazonaws.com | CHANGED | rc=0 >>
+Thu Aug 10 13:58:24 UTC 2023
+ec2-54-244-197-13.us-west-2.compute.amazonaws.com | CHANGED | rc=0 >>
+Thu Aug 10 13:58:24 UTC 2023
+ec2-34-216-68-247.us-west-2.compute.amazonaws.com | CHANGED | rc=0 >>
+Thu Aug 10 13:58:24 UTC 2023
+devops@ip-172-31-30-236:/root$ date
+Thu Aug 10 13:58:27 UTC 2023
+
+
+Step1: Change PasswordAuthentication to yes in /etc/ssh/sshd_config
+sudo service sshd restart
+Here, we are allowing user to login to my system by user id and password
+
+Step2: sudo adduser devops
+Here, I am creating a common user[devops], between all of them
+
+Step3: sudo vi /etc/sudoers and give Sudo permission to devops
+devops   ALL=(ALL:ALL) NOPASSWD:ALL
+It means whenever I will change password from normal use to roor[or vice versa] it will not ask password to me
+devops@ip-172-31-30-236:/root$ date
+Thu Aug 10 13:58:27 UTC 2023
+devops@ip-172-31-30-236:/root$ exit
+exit
+root@ip-172-31-30-236:~# su devops
+
+Step4: Install ansible on master by devops user
+$ sudo apt update
+$ sudo apt install software-properties-common
+$ sudo apt-add-repository --yes --update ppa:ansible/ansible
+$ sudo apt install ansible
+
+
+Step:5 
+ssh-keygen(On Master)
+ssh-copy-id -i ~/.ssh/id_rsa.pub <user-id>@<x-host(slave-host-name) #These commands needs to run on Master
+Here, I have generated token, and I shared that token by other server, so I can login to those server
+
+Generating public/private rsa key pair.
+1) Public access: Anyone can access the things
+2) Private access: After entering your details you can see you data.
+
+ubuntu $ cat /root/.ssh/id_rsa.pub
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC6R66es+YDHMMGluQzF8s1npNNa4sVJB3mE4v7XbUk/KePLF6yLQoChbKbXDDJYuf2O7qETRnFG7buN7H3IR5MWdxgiV5qthIFz3Zf4YxeiViSR7O7cn5xOptw7wvELuSAfiGoWqaNZ/q8lcYe6QA3x0MlZKgZgihcyMmpDvvdvKfIyrpClkqBG5sWN495AVAk1UqK6955QPHS/4wVz13JWiD1bddTkiynvnf8PcDZj9SjpgTE0Ww/mfjPMN2TahKFIDAXV9of91D7zNJvARuoh3bRe2LfOAL6VK+PYi5cv/YVflqpqMIpljrJOGRirbshIvI6y09AJ7E23rireDTb3poM/TO3gWLcEWJnSpKpomAFq5Q8vFAMHypWFso+HBY3E9f/F+FSjjli/VS4jD8RQZgxwD2ZkaBMg6eoAv4qp/Vj3DAzm2e6JSleUAhrakF6fjH6MLYxVxNer6SUZwP/BqnR9Q3PfajYfyBVqu0N+bhsHlejrYv9ytf06K3FVZs= root@ubuntu
+
+ansible -i /etc/ansible/hosts -m command -a "uptime" all
+ansible-playbook -i /etc/ansible/hosts nginx_install.yml
