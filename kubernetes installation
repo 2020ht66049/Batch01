@@ -1,0 +1,44 @@
+Golden image and kuberntes installation
+=======================================
+1) Installing docker
+apt-get update
+apt install docker.io -y 
+
+2) installing go
+#https://www.linuxtechi.com/install-go-golang-on-ubuntu-linux/
+wget https://go.dev/dl/go1.20.1.linux-amd64.tar.gz
+sudo tar -C /usr/local -xzf go1.20.1.linux-amd64.tar.gz
+ls /usr/local/go
+vi ~/.bashrc
+export PATH=$PATH:/usr/local/go/bin
+source ~/.bashrc
+go version
+
+3) install make
+apt-get update
+apt install make
+#Ubuntu Make is a command line tool which allows you to download the latest version of popular developer tools on your installation, installing it alongside all of the required dependencies (which will only ask for root access if you don't have all the required dependencies installed already), enable multi-arch on your system if you are on a 64 bit machine, integrate it with the Unity launcher. Basically, one command to get your system ready to develop with! 
+
+4) install cri-dockerd
+https://github.com/Mirantis/cri-dockerd 
+
+
+5) Installing kubeadm, kubectl and kubelet
+https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#installing-kubeadm-kubelet-and-kubectl
+
+sudo apt-get update
+sudo apt-get install -y apt-transport-https ca-certificates curl
+curl -fsSL https://dl.k8s.io/apt/doc/apt-key.gpg | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-archive-keyring.gpg
+echo "deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+sudo apt-get update
+sudo apt-get install -y kubelet kubeadm kubectl
+sudo apt-mark hold kubelet kubeadm kubectl
+
+6) kubeadm init --ignore-preflight-errors=NumCPU --ignore-preflight-errors=Mem --cri-socket "unix:///var/run/cri-dockerd.sock"
+
+7) install flannel kubectl apply -f https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml
+
+kubeadm join 172.31.21.51:6443 --token f3g638.xv9yvo73lk7eono6 \
+        --discovery-token-ca-cert-hash sha256:c54d012f30f2908c60b5cb1b195ee655d787856d178c6f55a16784d60c9099a9
+
+8) run kubectl get nodes
