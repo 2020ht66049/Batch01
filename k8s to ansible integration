@@ -1,0 +1,57 @@
+Please tell me kubernetes and ansible intergration study
+========================================================
+question: what is kubectl?
+it's a tool by which we can conect to k8s master.
+
+question: How to check kubectl version?
+kubectl version
+
+https://kubernetes.io/docs/setup/best-practices/cluster-large/
+
+Requirement: kubectl migration from version 1.27 to 1.28
+=========================================================
+kubeadm join 172.31.18.109:6443 --token ne70ok.8ws1md4ke48wowl8 \
+        --discovery-token-ca-cert-hash sha256:f3fb48844d9236baf2a9ed20b36d8492651c54bbc8ca3dfdceb7ae53d44eb635
+
+Deployment stategry
+====================
+1) Green blue deployment- Generally we are not using this concept, when we work in large enterprise we will set two similar site
+1.1) Production
+1.2) DR
+So, if production goes down DR will take over.
+Advatage is: zero downtime
+
+2) Canary deployment: When deployment is done on some small group of server
+
+3) Recreate: Here we delete the older system and create new system.
+I want to migrate from ubuntu 20.4 to ubuntu 22.04, can I do this?
+
+ubuntu $ docker build -t image1 .
+Sending build context to Docker daemon  23.04kB
+Step 1/2 : from ubuntu:20.04
+20.04: Pulling from library/ubuntu
+edaedc954fb5: Pull complete 
+Digest: sha256:33a5cc25d22c45900796a1aca487ad7a7cb09f09ea00b779e3b2026b4fc2faba
+Status: Downloaded newer image for ubuntu:20.04
+ ---> 6df894023726
+Step 2/2 : cmd echo "Hello"
+ ---> Running in 90ab67b0030d
+Removing intermediate container 90ab67b0030d
+ ---> 5365200957c6
+Successfully built 5365200957c6
+Successfully tagged image1:latest
+
+ubuntu $ docker build -t image2 .
+Sending build context to Docker daemon  23.55kB
+Step 1/2 : from ubuntu:22.04
+22.04: Pulling from library/ubuntu
+b237fe92c417: Pull complete 
+Digest: sha256:ec050c32e4a6085b423d36ecd025c0d3ff00c38ab93a3d71a460ff1c44fa6d77
+Status: Downloaded newer image for ubuntu:22.04
+ ---> 01f29b872827
+Step 2/2 : cmd echo "Hello"
+ ---> Running in e1e206f08331
+Removing intermediate container e1e206f08331
+ ---> 447e09e6412b
+Successfully built 447e09e6412b
+Successfully tagged image2:latest
